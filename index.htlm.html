@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        /* Reset some default styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Create a full-screen background image */
+        body {
+            background-image: url('coming_soon.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Style the "Coming Soon" text */
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        /* Style the countdown timer */
+        #countdown {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        /* Style the subscribe form */
+        #subscribe-form {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        /* Style the input field */
+        #email {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Style the submit button */
+        #submit-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Style the submit button on hover */
+        #submit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coming Soon</h1>
+    <div id="countdown">
+        <p id="days">00</p>
+        <p>Days</p>
+        <p id="hours">00</p>
+        <p>Hours</p>
+        <p id="minutes">00</p>
+        <p>Minutes</p>
+        <p id="seconds">00</p>
+        <p>Seconds</p>
+    </div>
+    <div id="subscribe-form">
+        <h2>Subscribe to be notified when we launch!</h2>
+        <form action="#" method="post">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit" id="submit-button">Subscribe</button>
+        </form>
+    </div>
+
+    <script>
+        // Set the launch date (replace with your desired date)
+        const launchDate = new Date("September 30, 2023 00:00:00").getTime();
+
+        // Update the countdown every 1 second
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            // If the launch date is in the past, display a message
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "We're Live!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
